@@ -5,7 +5,7 @@ import * as images from '../images/images'
 
 export const TextureSelector = () => {
   const [visible, setVisible] = useState(true)
-  const [texture, setTexture] = useStore(state => [state.texture, state.setTexture])
+  const [texture, setTexture] = useStore(state => [state?.texture, state?.setTexture])
 
   const {
     dirt,
@@ -42,7 +42,6 @@ export const TextureSelector = () => {
       const [textureName] = selectedTexture
       setTexture(textureName)
     }
-    console.log(selectedTexture)
   }, [dirt, wood, log, grass, glass])
 
   return (

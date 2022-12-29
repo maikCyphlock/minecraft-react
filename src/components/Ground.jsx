@@ -6,7 +6,7 @@ function ground () {
     rotation: [-Math.PI / 2, 0, 0],
     position: [0, -0.5, 0]
   }))
-  const [addCube] = useStore(state => [state.addCube])
+  const [addCube] = useStore(state => [state?.addCube])
 
   const handleClickGround = event => {
     event.stopPropagation()
