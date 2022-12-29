@@ -62,3 +62,9 @@ body {
 .hidden{
   display: none;
 }
+
+.menu.absolute{
+  top: 0;
+  position: absolute;
+  z-index: 1000;
+}
