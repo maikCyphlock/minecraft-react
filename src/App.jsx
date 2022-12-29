@@ -5,6 +5,7 @@ import Ground from './components/Ground'
 import Fpv from './components/Fpv'
 import { Player } from './components/Player'
 import { Cubes } from './components/Cubes'
+import { Menu } from './components/menu'
 import { TextureSelector } from './components/TextureSelect'
 export default function App () {
   return (
@@ -23,6 +24,7 @@ export default function App () {
 
       <div className='pointer'>+</div>
       <TextureSelector />
+      <Menu />
     </>
   )
 }
