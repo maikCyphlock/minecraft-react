@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { useStore } from '../hooks/useStore'
 import * as textures from '../images/texture'
 export const Cube = ({ id, position, texture }) => {
-  const [IsHovered, setIsHovered] = useState()
-  const [removeCube] = useStore(state => [state.removeCube])
+  const [isHovered, setIsHovered] = useState()
+  const [removeCube, addCube] = useStore((state) => [state.removeCube, state.addCube])
   const [ref] = useBox(() => ({
     type: 'Static',
     position
@@ -24,13 +24,40 @@ export const Cube = ({ id, position, texture }) => {
       }}
       onClick={(e) => {
         e.stopPropagation()
+        const clickedFace = Math.floor(e.faceIndex / 2)
+        const [x, y, z] = ref.current.position
+        console.log(clickedFace)
         if (e.altKey) {
-          removeCube(id)
+          return removeCube(id)
+        } if (clickedFace === 0) {
+          addCube(x + 1, y, z)
+        }
+        if (clickedFace === 1) {
+          addCube(x - 1, y, z)
+        }
+        if (clickedFace === 2) {
+          addCube(x, y + 1, z)
+        }
+        if (clickedFace === 3) {
+          addCube(x, y - 1, z)
+        }
+        if (clickedFace === 4) {
+          addCube(x, y, z + 1)
+        }
+        if (clickedFace === 5) {
+          addCube(x, y, z - 1)
         }
       }}
     >
-      <boxBufferGeometry attach='geometry' />
-      <meshStandardMaterial color={IsHovered ? 'grey' : 'white'} transparent map={activeTexture} attach='material' />
+      <boxGeometry attach='geometry' />
+      <meshStandardMaterial
+        color={isHovered ? 'grey' : 'white'}
+        map={activeTexture}
+        alphaMap={texture === 'glass' ? activeTexture : ''}
+        transparent
+        opacity={1}
+        attach='material'
+      />
     </mesh>
   )
 }
